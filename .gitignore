@@ -1,0 +1,4 @@
+# Ignore backup files left by some editors
+*~
+# Ignore anything created by Vagrant
+/.vagrant

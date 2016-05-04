@@ -1,0 +1,4 @@
+---
+- include: update.yml
+- include: virtualbox_ga.yml
+  when: "ansible_virtualization_role == 'guest' and ansible_virtualization_type == 'virtualbox'"

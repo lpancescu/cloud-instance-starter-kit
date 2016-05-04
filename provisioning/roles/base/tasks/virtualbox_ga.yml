@@ -1,0 +1,18 @@
+---
+- name: enable EPEL
+  yum: name=epel-release state=present
+
+- name: install DKMS
+  yum: name=dkms state=present
+
+- name: mount VirtualBox guest additions CD
+  mount: name=/mnt src=/dev/cdrom fstype=iso9660 opts=ro state=mounted
+
+- name: install VirtualBox guest additions
+  shell: ./VBoxLinuxAdditions.run chdir=/mnt
+  notify:
+  - reboot system
+  - wait for boot to complete
+
+- name: unmount VirtualBox guest additions CD
+  mount: name=/mnt src=/dev/cdrom fstype=iso9660 opts=ro state=unmounted
