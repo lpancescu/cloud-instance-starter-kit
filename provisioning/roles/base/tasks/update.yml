@@ -1,7 +1,4 @@
 ---
-- name: disable deltarpm
-  ini_file: dest=/etc/yum/yum.conf section=main option=deltarpm value=0
-
 - name: update all packages
   yum: name='*' state=latest
   notify:
