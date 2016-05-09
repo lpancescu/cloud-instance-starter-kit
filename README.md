@@ -6,6 +6,23 @@ connect to with `vagrant ssh`, without any manual intervention; if you
 are using VirtualBox, the VirtualBox Guest Additions are installed
 automatically as part of the bootstrap process.
 
+## Are the VirtualBox Guest Additions necessary?
+
+The VirtualBox [Guest Additions] provide a number of useful features,
+but they are optional (although Vagrant will display a stark warning if
+they are missing). The most important features are shared folders, and
+improved time synchronization. They might also help with clock stability
+problems on OS X hosts.
+
+If you only need shared folders, consider using [NFS] if your host OS
+supports it: it's significanly faster than using VirtualBox shared
+folders. I have run Linux guests for a long time without installing the
+Guest Additions, and, due to the time cost of installing and keeping
+them updated, I'll probably continue doing so.
+
+[Guest Additions]: https://www.virtualbox.org/manual/ch04.html#idp46691714790384
+[NFS]: https://www.vagrantup.com/docs/synced-folders/nfs.html
+
 ## Host requirements
 
 Vagrant and Ansible should be installed on the host. I tested with
@@ -45,3 +62,20 @@ VM, or after upgrading VirtualBox on the host.
   installing the guest additions. This is only necessary if the kernel
   or some development headers were updated, but since this is not trivial
   to detect, we will always reboot - just to be sure.
+
+* Vagrant sometimes fails to connect to the guest. This seems to be
+  caused by the guest occasionally not getting a reply from the DHCP
+  server in VirtualBox. After running `vagrant up; vagrant destroy -f` in
+  a loop over night, I saw this problem in almost 10% of boot attempts.
+  If this happens, you can log in from the console to shut the VM down
+  (VirtualBox 5 allows you to attach to a headless VM).
+
+* VirtualBox 5 provides a KVM paravirtualization interface by default
+  for Linux guests. This will result in the kernel clocksource being set
+  to kvm-clock. At least on OS X hosts, this results in a clock a few
+  times slower than it should be, so not even NTP helps in keeping the
+  clock synchronized. As a workaround, either add `clocksource=acpi_pm` to
+  the guest kernel parameters, or force VirtualBox to provide the older
+  paravirtualization interface from its 4.x series (add `v.customize
+  ["modifyvm", :id, "--paravirtprovider", "legacy"]` to the
+  VirtualBox-specific configuration in the Vagrantfile).
