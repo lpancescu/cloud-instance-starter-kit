@@ -9,7 +9,7 @@ automatically as part of the bootstrap process.
 ## Host requirements
 
 Vagrant and Ansible should be installed on the host. I tested with
-Vagrant 1.8.2 and Ansible 2.0.1.0 on OS X; while a different host OS
+Vagrant 1.8.1 and Ansible 2.0.1.0 on OS X; while a different host OS
 shouldn't create any problems, older Vagrant or Ansible versions might.
 
 ## Supported guest OSes
