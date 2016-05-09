@@ -71,10 +71,10 @@ VM, or after upgrading VirtualBox on the host.
   (VirtualBox 5 allows you to attach to a headless VM).
 
 * VirtualBox 5 provides a KVM paravirtualization interface by default
-  for Linux guests. This will result in the kernel clocksource being set
+  for Linux guests, which causes the guest kernel to set its clocksource
   to kvm-clock. At least on OS X hosts, this results in a clock a few
   times slower than it should be, so not even NTP helps in keeping the
-  clock synchronized. As a workaround, either add `clocksource=acpi_pm` to
+  time synchronized. As a workaround, either add `clocksource=acpi_pm` to
   the guest kernel parameters, or force VirtualBox to provide the older
   paravirtualization interface from its 4.x series (add `v.customize
   ["modifyvm", :id, "--paravirtprovider", "legacy"]` to the
