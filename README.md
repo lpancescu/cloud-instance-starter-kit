@@ -9,16 +9,15 @@ automatically as part of the bootstrap process.
 ## Are the VirtualBox Guest Additions necessary?
 
 The VirtualBox [Guest Additions] provide a number of useful features,
-but they are optional (although Vagrant will display a stark warning if
-they are missing). The most important features are shared folders, and
+but they are optional (although Vagrant will display a warning if they
+are missing). The most important features are shared folders, and
 improved time synchronization. They might also help with clock stability
 problems on OS X hosts.
 
-If you only need shared folders, consider using [NFS] if your host OS
-supports it: it's significanly faster than using VirtualBox shared
-folders. I have run Linux guests for a long time without installing the
-Guest Additions, and, due to the time cost of installing and keeping
-them updated, I'll probably continue doing so.
+If you only need to share files between the host and the guest, please
+consider using [NFS] instead of the VirtualBox Guest Additions: it's
+significantly faster and it doesn't require additional maintenance
+effort when VirtualBox itself or the guest kernel are updated.
 
 [Guest Additions]: https://www.virtualbox.org/manual/ch04.html#idp46691714790384
 [NFS]: https://www.vagrantup.com/docs/synced-folders/nfs.html
