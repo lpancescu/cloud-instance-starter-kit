@@ -71,10 +71,7 @@ VM, or after upgrading VirtualBox on the host.
 
 * VirtualBox 5 provides a KVM paravirtualization interface by default
   for Linux guests, which causes the guest kernel to set its clocksource
-  to kvm-clock. At least on OS X hosts, this results in a clock a few
-  times slower than it should be, so not even NTP helps in keeping the
-  time synchronized. As a workaround, either add `clocksource=acpi_pm` to
-  the guest kernel parameters, or force VirtualBox to provide the older
-  paravirtualization interface from its 4.x series (add `v.customize
-  ["modifyvm", :id, "--paravirtprovider", "legacy"]` to the
-  VirtualBox-specific configuration in the Vagrantfile).
+  to kvm-clock. On some older processors, this causes the system time to
+  significantly fall behind the real time when the CPU is idle (due to
+  the TSC halting when the CPU is idle). Set the paravirtualization
+  interface to `none` if you encounter this problem.

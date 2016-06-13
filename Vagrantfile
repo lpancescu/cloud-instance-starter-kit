@@ -11,6 +11,8 @@ Vagrant.configure(2) do |config|
     v.customize ["storageattach", :id, "--storagectl", "IDE Controller",
 		 "--port", "1", "--device", "0", "--type", "dvddrive",
 		 "--medium", "/Applications/VirtualBox.app/Contents/MacOS/VBoxGuestAdditions.iso"]
+    # If the system time falls behind, uncomment the next line
+    # v.customize ["modifyvm", :id, "--paravirtprovider", "none"]
   end
 
   config.vm.provision "ansible" do |ansible|
