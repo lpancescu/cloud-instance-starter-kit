@@ -30,10 +30,11 @@ shouldn't create any problems, older Vagrant or Ansible versions might.
 
 ## Supported guest OSes
 
-Only the official Vagrant images from the CentOS Project are currently
-supported (both `centos/6` and `centos/7`). The default is to create
-CentOS 7 images; if you prefer CentOS 6, please change the
-`config.vm.box` setting in the `Vagrantfile` into `"centos/6"`.
+Only the following images are supported:
+
+* `centos/7` (CentOS Linux 7, **default**)
+* `centos/6` (CentOS Linux 6)
+* `projectatomic/adb` (Atomic Developer Bundle)
 
 ## How to use
 
